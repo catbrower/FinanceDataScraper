@@ -1,3 +1,4 @@
+import pathlib
 import logging
 
 from Decorators import service
@@ -5,9 +6,11 @@ from Decorators import service
 @service
 class LoggingService:
     def __init__(self):
+        path = pathlib.Path(__file__).parent.resolve()
+
         logging.basicConfig(level=logging.INFO,
                     format='%(asctime)s [%(levelname)s] %(message)s',
-                    filename='logfile',
+                    filename=f'{path}/logfile',
                     filemode='a')
 
         self.logger = logging.getLogger(__name__)
